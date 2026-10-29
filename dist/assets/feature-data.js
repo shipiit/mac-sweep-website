@@ -10,22 +10,22 @@ export const featureGroups = [
     items: [
       [
         "Smart Scan",
-        "Checks junk, security, speed, and apps in one guided flow. The optimization view shows progress and includes a Stop control.",
+        "One button checks junk, security, speed, and apps. Cleanup then runs step by step in an “Optimizing your Mac” view: each step shows its status (waiting, done, warning, or skipped), and a progress ring doubles as a Stop button that ends the clean-up after the current step. The junk check takes about 20 seconds because it measures known junk locations instead of walking the whole disk.",
         "Start here when you want an overall picture instead of opening every tool separately.",
       ],
       [
         "Space & Junk",
-        "A visual disk map shows folders in proportion to their size, including hidden ones. Recommendations are split into Safe to remove and Review first, with explanations of the consequences.",
+        "A treemap shows every folder in proportion to its size, hidden ones included. Click a folder to list its contents in the folder picker panel and tick what to remove. Recommendations are split into Safe to remove and Review first, each explaining what it is and what happens if deleted.",
         "A large rectangle means a large folder. Follow the space to its source before deciding what can go.",
       ],
       [
         "Large & Hidden Files",
-        "Inspect the largest files and folders. Narrow the view to hidden items or files older than a year.",
+        "Inspect the largest files and folders, grouped by kind: AI sessions & models, Developer files, App data, Media, Downloads & installers, macOS assets, and Documents. Each item carries a Safe, Think first, or Keep label and an “if deleted” explanation, and a review sheet comes before anything moves to the Trash. Narrow the view to hidden items or files older than a year.",
         "Hidden means normally concealed by Finder. It does not automatically mean unnecessary or safe to delete.",
       ],
       [
         "Duplicate Files",
-        "SHA-256 hashes identify byte-for-byte identical content. Cleanup preserves at least one copy.",
+        "SHA-256 hashes identify byte-for-byte identical content. Duplicate removal always keeps one copy.",
         "Two files with different names can still contain exactly the same data. You review which copy to keep.",
       ],
       [
@@ -58,6 +58,31 @@ export const featureGroups = [
         "A separate, explicit workflow for permanent deletion, with confirmation.",
         "Use only when you intend to permanently delete. SSD behavior, snapshots, and backups limit secure-erasure guarantees.",
       ],
+      [
+        "Cleanup Script",
+        "Turn a selection into a shell script to read, copy, or save. It uses each tool’s own clean command where one exists (npm, pnpm, brew, uv, docker…), and Review first items stay commented out. From the same sheet, MacSweep can run the tool clean commands (npm cache clean, pnpm store prune, brew cleanup…) with a live log; Review first items are never run.",
+        "Useful when you would rather run cleanup yourself, or keep a record of what you removed. Nothing is deleted by generating the script; you choose whether to run the tool commands.",
+      ],
+      [
+        "Growth Badges",
+        "Recommendations show how much a location grew or shrank since the previous scan.",
+        "A cache that keeps growing between scans is often the one worth a closer look first.",
+      ],
+      [
+        "Fast Junk Scan",
+        "Smart Scan and Space & Junk measure known junk locations instead of the whole disk, so finding junk takes about 20 seconds. Besides caches and logs, it finds app update leftovers, unfinished Codex runtime downloads, old Claude Code CLI versions, old VS Code and Cursor extension versions, AI model caches, and iPhone backups and firmware. The Claude desktop sandbox VM is listed for review.",
+        "Old versions and half-finished downloads are left behind when tools update themselves. Knowing where they live means MacSweep can check those places directly.",
+      ],
+      [
+        "Weekly Auto-clean",
+        "Opt-in and off by default. Once a week MacSweep moves safe junk to the Trash and sends a notification. It only takes items marked safe and never anything in use.",
+        "It is the routine tidy-up you would otherwise forget. Everything goes to the Trash first, so you can still restore it.",
+      ],
+      [
+        "Browser Profiles",
+        "Per-profile sizes for Chrome, Brave, Edge, Arc, and Vivaldi. Profile caches can be cleaned (MacSweep refuses while that browser is running); site data is shown for review. Logins, cookies, and bookmarks are never touched.",
+        "Each browser profile keeps its own cache. Seeing them side by side shows which profile is using the space.",
+      ],
     ],
     terms: [
       [
@@ -67,6 +92,10 @@ export const featureGroups = [
       [
         "Cache",
         "Saved data an app uses to avoid doing the same work again. It may need to be recreated after cleanup.",
+      ],
+      [
+        "Known junk location",
+        "A folder where apps and tools predictably leave rebuildable data, such as caches, old versions, or unfinished downloads.",
       ],
       [
         "SHA-256",
@@ -87,12 +116,12 @@ export const featureGroups = [
     items: [
       [
         "Malware Scan",
-        "Checks disguised programs such as invoice.pdf.app, broken or missing signatures, Gatekeeper rejections, known adware, and hidden executables.",
+        "Quick, Full, and Deep scans (Deep covers the whole home folder, apps, and startup folders). Checks disguised programs such as invoice.pdf.app, broken or missing signatures, Gatekeeper rejections, known adware, and hidden executables. Shows Apple XProtect’s definition version and keeps a history of every scan.",
         "A finding is a reason to investigate. You can reveal, quarantine, or ignore it; these are heuristic checks, not a signature antivirus.",
       ],
       [
         "Download Protection",
-        "Checks files when downloads finish. Clear threats move to quarantine; suspicious files raise a notification. Enabled by default in the app.",
+        "Checks every finished download and keeps the last 20 with where they came from, who signed them, and the verdict. Clear threats move to quarantine before you can open them; suspicious files raise a notification. On by default.",
         "This is a completed-download check. It is not real-time execution blocking through Apple’s Endpoint Security entitlement.",
       ],
       [
@@ -102,7 +131,7 @@ export const featureGroups = [
       ],
       [
         "Security Audit",
-        "Shows SIP, Gatekeeper, FileVault, Firewall, and XProtect status, plus suspicious startup items.",
+        "A protection score with SIP, Gatekeeper, FileVault, Firewall, and XProtect status (the Firewall can be turned on from here), suspicious startup items, high-risk extensions, recommendations, and app-permission counts. The sidebar badge shows Secure or the number of issues.",
         "These are different protections: system integrity, app verification, disk encryption, incoming connection rules, and Apple malware protection.",
       ],
       [
@@ -164,7 +193,7 @@ export const featureGroups = [
     items: [
       [
         "Processes & Memory",
-        "View CPU and memory measurements, inspect growing apps, and investigate processes.",
+        "Activity-Monitor-accurate memory and CPU measurements, grouped processes, and a process inspector.",
         "A process is a running program or part of one. CPU measures processing work; memory is the working space it currently uses.",
       ],
       [
@@ -191,6 +220,11 @@ export const featureGroups = [
         "Startup Items",
         "Review login items, launch agents, and daemons. Stop, disable, or enable supported items.",
         "Stopping ends a current run; disabling changes whether it starts automatically. Review a service’s purpose first.",
+      ],
+      [
+        "Startup Guard",
+        "Opt-in. Holds new launch agents and daemons until you approve them. Your own (per-user) agents are stopped instantly; system-wide ones are stopped with one click.",
+        "Apps can quietly add something that starts with your Mac. Startup Guard asks you first instead of letting it run unnoticed.",
       ],
     ],
     terms: [
@@ -258,6 +292,11 @@ export const featureGroups = [
         "See the port, process, starting command, and project directory. Open, copy, or stop the relevant process.",
         "A port is a numbered connection point. Port 3000 might belong to your web development server; the process details explain which one.",
       ],
+      [
+        "Git Repos",
+        "Finds repositories with big .git folders. Compact runs git gc while keeping reflogs, and Prune LFS cache clears Git LFS objects. Repositories in use are skipped.",
+        "A long-lived repository collects packed history and large-file caches. Compacting keeps your history and makes the folder smaller.",
+      ],
     ],
     terms: [
       [
@@ -288,7 +327,7 @@ export const featureGroups = [
     items: [
       [
         "Overview & Filters",
-        "Filter to all tools, Claude Code, or Codex. Choose Today, 7, 30, or 90 days. Review tokens, requests, output, cache hits, sessions, and projects.",
+        "Filter to all tools, Claude Code, or Codex. Choose Today, 7, 30, or 90 days. Review tokens, requests, output, cache hits, sessions, and projects. Totals update within seconds of each message, reading only new transcript lines.",
         "The same filters apply across the AI page, so the numbers describe the same selected tools and time range.",
       ],
       [
@@ -323,7 +362,7 @@ export const featureGroups = [
       ],
       [
         "Transcript Storage",
-        "Find Claude Code and Codex conversation logs older than 30, 90, or 180 days. Review and confirm moving selected logs to Trash.",
+        "Find Claude Code and Codex conversation logs older than 30, 90, or 180 days. Review and confirm moving selected logs to Trash. Sessions you have named are always kept.",
         "Removing a transcript prevents resuming or searching that conversation through its local history. Usage totals already counted in MacSweep stay recorded.",
       ],
       [
@@ -383,6 +422,11 @@ export const featureGroups = [
         "Track time spent in applications locally, with a privacy control to stop tracking and a confirmed history-clear action.",
         "Usage tracking records time, not the content of what you do inside an app. The Settings view describes a 30-day local history.",
       ],
+      [
+        "App Footprint",
+        "Each app’s total size including caches, support data, containers, and preferences. Clear cache, or Reset app to move everything except the app itself to the Trash. Reset refuses while the app is running and never applies to Apple apps.",
+        "An app’s icon can be small while its data is large. Resetting is like a fresh install without downloading the app again.",
+      ],
     ],
     terms: [
       ["Leftovers", "Supporting files remaining after an app is removed."],
@@ -428,6 +472,16 @@ export const featureGroups = [
         "A two-line menu bar item, hover-expanded notch HUD with System, Apps, Ports, AI, and Clean, and a live Dock icon.",
         "The notch HUD is a small heads-up display around the screen cutout. It keeps common information close to your workflow.",
       ],
+      [
+        "Lightweight by design",
+        "Typical idle use is about 100 MB of memory and 1–3% CPU with the window open. Live process sampling runs every 3 seconds only while a page that shows it is open, otherwise every 10 seconds.",
+        "A monitoring tool should not become the thing slowing your Mac down. Big scans release memory as they go and hand it back afterwards.",
+      ],
+      [
+        "Storage Forecast",
+        "From recorded free-space history, MacSweep estimates when the disk fills up: “Full in about N weeks at this rate.”",
+        "A forecast is a trend, not a promise. A big download or cleanup changes the rate.",
+      ],
     ],
     terms: [
       ["Timeline", "A series of recorded measurements arranged by time."],
@@ -466,7 +520,7 @@ export const featureGroups = [
       ],
       [
         "Sidebar",
-        "Choose which pages appear and fold groups. Smart Scan and Dashboard always remain visible.",
+        "A short sidebar: the main pages, then one row per area. An area’s pages open as tabs along the top. Fold the sidebar and choose which pages appear in Settings → Sidebar. Smart Scan and Dashboard always remain visible.",
         "Hiding a page reduces visual clutter; it does not turn off that feature’s background work.",
       ],
       [

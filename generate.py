@@ -8,11 +8,11 @@ import os
 ROOT = Path(__file__).resolve().parent
 ORIGIN = os.environ.get('SITE_ORIGIN', 'https://macsweep-command-center.iamraj.chatgpt.site').rstrip('/')
 PAGES = {
-    'index': ('MacSweep — A clearer Mac. A better flow.', 'One native Mac app for cleanup, protection, performance, developer tools, AI usage, and system insights.'),
-    'features': ('All capabilities — MacSweep', 'Explore Smart Scan, disk cleanup, duplicate detection, security audits, performance tools, and system insights.'),
-    'developers': ('For developers — MacSweep', 'Understand Docker, Homebrew, runtimes, Xcode storage, listening ports, local services, Claude Code, and Codex usage.'),
+    'index': ('MacSweep — A clearer Mac. A better flow.', 'One native Mac app to clean, speed up, protect and understand your Mac: Smart Scan, malware and download checks, developer tools, AI usage and system insights.'),
+    'features': ('All capabilities — MacSweep', 'Explore Smart Scan, the Space & Junk treemap, duplicates, malware scans, download protection, security audits, performance tools, and system insights.'),
+    'developers': ('For developers — MacSweep', 'Understand Docker, Homebrew, runtimes, Xcode storage, node_modules, listening ports, dev services, and Claude Code and Codex usage and limits.'),
     'trust': ('Privacy & safety — MacSweep', 'Understand on-device processing, cleanup safeguards, PathGuard, quarantine, download checks, and protection limits.'),
-    'download': ('Download & setup — MacSweep', 'Download MacSweep for macOS 15 and Apple Silicon. Installation instructions, signing details, and frequently asked questions.'),
+    'download': ('Download & setup — MacSweep', 'Download MacSweep 1.3.0 for macOS 15 and Apple Silicon. Installation instructions, signing details, and frequently asked questions.'),
 }
 styles_version = hashlib.sha256((ROOT/'dist/assets/styles.css').read_bytes()).hexdigest()[:10]
 features_version = hashlib.sha256((ROOT/'dist/assets/features.css').read_bytes()).hexdigest()[:10]

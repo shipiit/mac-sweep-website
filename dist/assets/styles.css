@@ -1683,3 +1683,193 @@ body.motion-paused *:after {
     gap: 10px;
   }
 }
+/* Screenshot slots: a window frame that shows the real image, or a styled placeholder until it exists. */
+.shot-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 28px;
+}
+.shot-gallery > div:nth-child(2n) .shot {
+  transition-delay: 0.08s;
+}
+.shot {
+  margin: 0;
+}
+.shot-frame {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--panel);
+  box-shadow: 0 24px 60px #0007;
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.35s,
+    box-shadow 0.35s;
+}
+.shot:hover .shot-frame,
+.shot:focus-within .shot-frame {
+  transform: translateY(-4px);
+  border-color: #8aa5ff40;
+  box-shadow: 0 32px 70px #000a;
+}
+.shot-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--muted);
+}
+.shot-bar i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+.shot-bar i:nth-child(2) {
+  background: #febc2e;
+}
+.shot-bar i:nth-child(3) {
+  background: #28c840;
+}
+.shot-bar span {
+  margin-left: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.shot-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+}
+.shot-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  color: transparent;
+}
+.shot.is-missing .shot-media img {
+  display: none;
+}
+.shot-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 6px;
+  text-align: center;
+  padding: 24px;
+  background:
+    linear-gradient(90deg, transparent 0 22%, #ffffff06 22% 22.4%, transparent 22.4%),
+    radial-gradient(circle at 70% 30%, #728bff1f, transparent 55%),
+    radial-gradient(circle at 25% 80%, #7de2ce14, transparent 50%), #0c1019;
+  overflow: hidden;
+}
+.shot-fallback:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, #ffffff0b 50%, transparent 65%);
+  translate: -100% 0;
+  animation: shot-sheen 5.5s ease-in-out infinite;
+}
+.shot-glyph {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 3px solid #7de2ce33;
+  border-top-color: var(--mint);
+  margin-bottom: 6px;
+  animation: spin 6s linear infinite;
+}
+.shot-fallback b {
+  font: 650 17px/1.3 Manrope, sans-serif;
+}
+.shot-fallback small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.shot figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+.shot figcaption b {
+  color: var(--text);
+  font-weight: 600;
+}
+.shot-feature {
+  margin-top: 48px;
+}
+.shot-pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: 28px;
+}
+.light-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.light-stats span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.light-stats b {
+  color: var(--text);
+  font-weight: 600;
+}
+@keyframes shot-sheen {
+  0%,
+  35% {
+    translate: -100% 0;
+  }
+  70%,
+  100% {
+    translate: 100% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shot:hover .shot-frame,
+  .shot:focus-within .shot-frame {
+    transform: none;
+  }
+  .shot-fallback:after {
+    display: none;
+  }
+}
+.motion-paused .shot-frame {
+  transition: none;
+}
+.motion-paused .shot:hover .shot-frame {
+  transform: none;
+}
+.shot-gallery:has(> :only-child) {
+  max-width: 860px;
+  margin-inline: auto;
+}
+.step code {
+  font-size: 12px;
+  background: #ffffff0d;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 1px 6px;
+  overflow-wrap: anywhere;
+}
+.notice + .notice {
+  margin-top: 12px;
+}
+.shot-media.is-fit img {
+  object-fit: contain;
+  object-position: center;
+}

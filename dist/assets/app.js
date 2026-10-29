@@ -4,9 +4,11 @@ import { header, footer } from "./components.js";
 import { pages } from "./pages.js";
 import { initDemo } from "./demo.js";
 import { initFeatureLabs } from "./feature-lab.js";
+import { initScreens } from "./screens.js";
 
 document.getElementById("app").innerHTML =
   header + `<main id="main">${pages[page] || pages.index}</main>` + footer;
+initScreens();
 
 // Navigation and keyboard accessibility.
 const menu = document.querySelector(".menu");
