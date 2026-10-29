@@ -119,7 +119,7 @@ const sizes = { "notch-hud": [2400, 1200], "menu-bar": [1600, 1600] };
 function shot(name, extra = "") {
   const [title, caption, alt] = screens[name];
   const [w, h] = sizes[name] || [2880, 1800];
-  return `<figure class="shot reveal ${extra}" data-shot="${name}"><div class="shot-frame"><div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>MacSweep — ${title}</span></div><div class="shot-media${sizes[name] ? " is-fit" : ""}" style="aspect-ratio:${w} / ${h}"><div class="shot-fallback" aria-hidden="true"><span class="shot-glyph"></span><b>${title}</b><small>Screenshot coming soon</small></div><img src="assets/screens/${name}.png" alt="${alt}" width="${w}" height="${h}" loading="lazy" decoding="async"></div></div><figcaption><b>${title}.</b> ${caption}</figcaption></figure>`;
+  return `<figure class="shot reveal ${extra}" data-shot="${name}"><div class="shot-frame"><div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>MacSweep — ${title}</span></div><div class="shot-media${sizes[name] ? " is-fit" : ""}" style="aspect-ratio:${w} / ${h}"><div class="shot-fallback" aria-hidden="true"><div class="sk-side"><i class="sk-logo"></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div><div class="sk-main"><div class="sk-tabs"><i class="on"></i><i></i><i></i></div><b class="sk-title">${title}</b><div class="sk-stats"><i></i><i></i><i></i></div><div class="sk-cards"><i class="sk-ring"></i><i class="sk-bars"></i></div></div></div><img src="assets/screens/${name}.png" alt="${alt}" width="${w}" height="${h}" loading="lazy" decoding="async"></div></div><figcaption><b>${title}.</b> ${caption}</figcaption></figure>`;
 }
 
 const gallery = (names, label) =>

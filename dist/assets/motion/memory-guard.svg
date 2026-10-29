@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Memory pressure rises, an idle app is quit and memory returns to normal">
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif}
+.gauge{stroke-dasharray:283;animation:g 8s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes g{0%{stroke-dashoffset:150;stroke:#34c759}35%,55%{stroke-dashoffset:45;stroke:#ff9f0a}75%,96%{stroke-dashoffset:135;stroke:#34c759}100%{stroke-dashoffset:150;stroke:#34c759}}
+.hi{opacity:0;animation:hi 8s infinite}.lo{animation:lo 8s infinite}
+@keyframes hi{0%,30%{opacity:0}35%,58%{opacity:1}64%,100%{opacity:0}}
+@keyframes lo{0%,28%{opacity:1}33%,66%{opacity:0}72%,100%{opacity:1}}
+.quit{animation:quit 8s cubic-bezier(.5,0,.3,1) infinite;transform-box:fill-box}
+@keyframes quit{0%,52%{transform:none;opacity:1}62%,94%{transform:translateX(60px);opacity:0}100%{transform:none;opacity:1}}
+.flag{opacity:0;animation:hi 8s infinite}
+.toast{opacity:0;animation:toast 8s infinite}
+@keyframes toast{0%,62%{opacity:0;transform:translateY(10px)}68%,92%{opacity:1;transform:none}100%{opacity:0}}
+.bar{transform-box:fill-box;transform-origin:left;animation:grow 8s infinite}
+@keyframes grow{0%{transform:scaleX(.7)}35%,60%{transform:scaleX(1)}75%,100%{transform:scaleX(.7)}}
+@media (prefers-reduced-motion:reduce){.gauge,.quit,.bar{animation:none}.hi,.flag,.toast{display:none}.lo{animation:none}}
+</style>
+<rect width="480" height="300" rx="16" fill="#0c1019"/>
+<rect x=".5" y=".5" width="479" height="299" rx="16" fill="none" stroke="#ffffff14"/>
+<circle cx="20" cy="18" r="4.5" fill="#ff5f57"/><circle cx="34" cy="18" r="4.5" fill="#febc2e"/><circle cx="48" cy="18" r="4.5" fill="#28c840"/>
+<text x="240" y="22" fill="#9299ae" font-size="11" text-anchor="middle">MacSweep — Memory Guard</text>
+<line x1="0" y1="36" x2="480" y2="36" stroke="#ffffff10"/>
+<circle cx="110" cy="150" r="45" fill="none" stroke="#ffffff12" stroke-width="10"/>
+<circle class="gauge" cx="110" cy="150" r="45" fill="none" stroke-width="10" stroke-linecap="round" transform="rotate(-90 110 150)"/>
+<g class="lo"><text x="110" y="152" fill="#f0f3ff" font-size="18" font-weight="700" text-anchor="middle">Normal</text><text x="110" y="168" fill="#9299ae" font-size="10" text-anchor="middle">memory</text></g>
+<g class="hi"><text x="110" y="152" fill="#ff9f0a" font-size="18" font-weight="700" text-anchor="middle">High</text><text x="110" y="168" fill="#9299ae" font-size="10" text-anchor="middle">pressure</text></g>
+<text x="210" y="64" fill="#f0f3ff" font-size="12" font-weight="600">What’s using your memory</text>
+<g font-size="11.5">
+<text x="210" y="94" fill="#f0f3ff">Chrome</text><rect x="290" y="85" width="140" height="10" rx="5" fill="#ffffff0d"/><rect x="290" y="85" width="120" height="10" rx="5" fill="#5b7bff"/><text x="456" y="94" fill="#9299ae" text-anchor="end">6.2 GB</text>
+<text x="210" y="124" fill="#f0f3ff">Docker</text><rect x="290" y="115" width="140" height="10" rx="5" fill="#ffffff0d"/><rect class="bar" x="290" y="115" width="104" height="10" rx="5" fill="#ff9f0a"/><text x="456" y="124" fill="#9299ae" text-anchor="end">4.8 GB</text>
+<g class="flag"><rect x="210" y="130" width="52" height="15" rx="7.5" fill="#ff9f0a22"/><text x="236" y="141" fill="#ff9f0a" font-size="9" text-anchor="middle">Growing</text></g>
+<g class="quit"><text x="210" y="172" fill="#f0f3ff">Slack</text><rect x="290" y="163" width="140" height="10" rx="5" fill="#ffffff0d"/><rect x="290" y="163" width="60" height="10" rx="5" fill="#8e8e93"/><text x="456" y="172" fill="#9299ae" text-anchor="end">2.4 GB</text><text x="210" y="187" fill="#9299ae" font-size="9.5">Idle 2 h</text></g>
+<text x="210" y="216" fill="#f0f3ff">Xcode</text><rect x="290" y="207" width="140" height="10" rx="5" fill="#ffffff0d"/><rect x="290" y="207" width="40" height="10" rx="5" fill="#5b7bff"/><text x="456" y="216" fill="#9299ae" text-anchor="end">1.6 GB</text>
+</g>
+<g class="toast"><rect x="150" y="244" width="250" height="34" rx="10" fill="#111622" stroke="#34c75955"/><circle cx="170" cy="261" r="7" fill="#34c759"/><path d="M166.5 261l2.4 2.4 4.3-4.3" stroke="#06210f" stroke-width="1.7" fill="none"/><text x="186" y="265" fill="#f0f3ff" font-size="11.5">Quit idle Slack · freed 2.4 GB</text></g>
+</svg>
